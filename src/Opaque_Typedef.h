@@ -44,3 +44,7 @@
     std::cout << Bar1.Name() << std::endl; // Bar1
     std::cout << Bar2.Name() << std::endl; // Bar2
 }
+
+// TODO: Look at this library which Saad recommends:
+
+// https://foonathan.net/blog/2016/10/19/strong-typedefs.html

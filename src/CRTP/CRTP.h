@@ -8,6 +8,8 @@
         void Foo() {
             // some SuperClass specific code
             static_cast<Derived*>(this)->Bar();
+            // Depending on context, might need to do:
+            // static_cast<const Derived * const>(this)->Bar();
         }
     }
 

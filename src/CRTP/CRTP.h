@@ -2,7 +2,6 @@
 
 // Call subclass member function from superclass member function
 {
-
     template <class Derived>
     class SuperClass
     {    

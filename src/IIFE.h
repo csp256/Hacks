@@ -1,6 +1,6 @@
 // IIFE := Immediately Invoked Function Expression
 
-    // Many uses, but I like this one:
+    // Many uses. For example:
 
 const int x = [&] {
     if (b1)
@@ -8,6 +8,7 @@ const int x = [&] {
     else
         return 2 * y;
 }();
+// Very flexible and readible.
 
     // Alternative:
 

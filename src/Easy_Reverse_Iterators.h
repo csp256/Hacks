@@ -10,7 +10,7 @@ template<typename T> class reverse_adapter {
 template<typename T> 
 reverse_adapter<T> reverse_iteration(T &c) { return reverse_adapter<T>(c); } 
 
-//
+// Some quality improvements can be made to above (const versions, etc) but it works!
 
 std::vector<int> v {1, 2, 3}; 
 for (auto & i : reverse_iteration(a)) {

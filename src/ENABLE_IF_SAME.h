@@ -1,3 +1,34 @@
+#include <type_traits>
+
+template <class T, class ... Args>
+struct is_any : std::disjunction<std::is_same<T, Args> ...> {};
+
+template <class T, class ... Args>
+struct are_all : std::conjunction<std::is_same<T, Args> ...> {};
+
+template <typename Condition>
+using EnableIf = std::enable_if_t<Condition::value>;
+
+#define UNPACK_MACRO( ... ) __VA_ARGS__
+// Black magic
+#define ENABLE_IF_IMPL( ARG ) typename = EnableIf< UNPACK_MACRO ARG > 
+
+#define ENABLE_IF( ... ) ENABLE_IF_IMPL((__VA_ARGS__))
+
+// Usage
+template <typename T, ENABLE_IF(is_any<T, float, double>)>
+void f(T x) {}
+
+f(3); // not-ok
+f(3.14); // ok
+
+
+/*
+newst / best
+--------
+older
+*/
+
 template <class T, class ... args>
 struct is_any : std::disjunction<std::is_same<T, args>...> {};
 
@@ -8,8 +39,8 @@ struct is_any : std::disjunction<std::is_same<T, args>...> {};
 template <typename T, ENABLE_IF(T, float, double)>
 void f(T x) {}
 
-f(3); // ok
-f(3.14); // not-ok
+f(3); // not-ok
+f(3.14); // ok
 
 /*
 new

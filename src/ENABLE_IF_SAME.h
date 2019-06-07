@@ -1,3 +1,22 @@
+template <class T, class ... args>
+struct is_any : std::disjunction<std::is_same<T, args>...> {};
+
+#define ENABLE_IF(ARG_1, ...)\
+    typename std::enable_if<is_any<ARG_1, __VA_ARGS__>::value>::type * = nullptr
+
+// Usage
+template <typename T, ENABLE_IF(T, float, double)>
+void f(T x) {}
+
+f(3); // ok
+f(3.14); // not-ok
+
+/*
+new
+-----------
+old
+*/
+
 #define ENABLE_IF_SAME(ARG_1, ARG_2) typename std::enable_if< std::is_same<ARG_1, ARG_2>::value>::type * = nullptr
 
 // Usage

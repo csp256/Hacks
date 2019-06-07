@@ -2,7 +2,7 @@ template <class T, class ... args>
 struct is_any : std::disjunction<std::is_same<T, args>...> {};
 
 #define ENABLE_IF(ARG_1, ...)\
-    typename std::enable_if<is_any<ARG_1, __VA_ARGS__>::value>::type * = nullptr
+    typename std::enable_if_t<is_any<ARG_1, __VA_ARGS__>::value> * = nullptr
 
 // Usage
 template <typename T, ENABLE_IF(T, float, double)>
